@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 import * as yup from 'yup'
+import './login.css'
 
 export default function Register() {
     // managing state for our form inputs
@@ -117,10 +118,11 @@ export default function Register() {
    console.log('formState', formState)
 
    return (
+    <div className='formContainer'>
     <form onSubmit={formSubmit}>
     {serverError && <p className='error'>{serverError}</p>}
     <label htmlFor='name'>
-        Name
+        Name:
          <input 
          id='name' 
          type='text' 
@@ -131,7 +133,7 @@ export default function Register() {
     </label>
     {errors.name.length > 0 ? <p className='error'>{errors.name}</p> : null}
     <label htmlFor='email'>
-               Email
+               Email:
                <input
                 id='email'
                 type='text'
@@ -144,7 +146,7 @@ export default function Register() {
                     <p className='error'>{errors.email}</p>
                 ) : null}
            <label htmlFor='password'>
-               Password
+               Password:
                <input 
                 id='password'
                 type='text'
@@ -163,7 +165,7 @@ export default function Register() {
                  checked={formState.terms}
                  onChange={inputChange}
             />
-                 Terms & Conditions
+                 Terms & Conditions:
            </label>
            {errors.terms.length > 0 ? (
                      <p className='error'>{errors.terms}</p>
@@ -173,5 +175,6 @@ export default function Register() {
            <pre>{JSON.stringify(post, null, 2)}</pre>
 
        </form>
+       </div>
    )
 }

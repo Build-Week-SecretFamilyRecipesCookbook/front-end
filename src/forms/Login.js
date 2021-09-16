@@ -3,6 +3,7 @@ import { Link, Switch, Route } from 'react-router-dom'
 import Register from './Register'
 import axios from 'axios'
 import * as yup from 'yup'
+import './login.css'
 
 export default function Form() {
     // managing state for our form inputs
@@ -110,9 +111,10 @@ export default function Form() {
    }, [formState, formSchema])
    console.log('formState', formState)
    return (
-       <form>
+       <div className='formContainer'>
+       <form onSubmit={formSubmit}>
            <label htmlFor='email'>
-               Email
+               Email:
                <input
                 id='email'
                 type='text'
@@ -125,7 +127,7 @@ export default function Form() {
                     <p className='error'>{errors.email}</p>
                  : null}
            <label htmlFor='password'>
-               Password
+               Password:
                <input 
                 id='password'
                 type='text'
@@ -137,11 +139,13 @@ export default function Form() {
            {errors.password.length > 0 &&
                     <p className='error'>{errors.password}</p>}
                  <Link to='/register'>New User? Register now!</Link>
-           <button type='submit' onChange={formSubmit} disabled={buttonDisabled}>Submit</button>
+           <button type='submit' disabled={buttonDisabled}>Submit</button>
            {/*Displays post request */}
            <pre>{JSON.stringify(post, null, 2)}</pre>
+           
 
 
        </form>
+       </div>
    )
 }
