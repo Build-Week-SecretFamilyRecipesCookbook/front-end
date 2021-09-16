@@ -1,23 +1,38 @@
-import logo from './logo.svg';
+import { useParams,
+  Link, 
+  Switch, 
+  Route } 
+  from 'react-router-dom'
 import './App.css';
+import styled from 'styled-components'
+import Login from './forms/Login'
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <nav>
+        <Link to='/'>Home</Link>
+        <Link to='/recipes'>All Recipes</Link>
+        <Link to='/profile'>Your Recipes</Link>
+        <Link to='/login'>Log In/Sign Up</Link>
+      </nav>
+      <div className='main-content'>
+          <h1>Secret Recipes</h1>
+          <div className='card'>
+            <h2>Easily store all of your favorite recipes!</h2>
+            <p>Upload images, ingredients, and much more to your account and create your own personal cookbook!</p>
+            <p>Get inspirations from other user's recipes!</p>
+            <p>Share your own recipes!</p>
+          </div>
+      </div>
+
+      <Switch>
+        <Route exact path='/login'>
+          <Login />
+        </Route>
+      </Switch>
+
     </div>
   );
 }
