@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Link, Switch, Route } from 'react-router-dom'
-import Register from './Register'
 import axios from 'axios'
 import * as yup from 'yup'
 
-export default function Form() {
+export default function Register() {
     // managing state for our form inputs
     const [formState, setFormState] = useState({
+        name: '',
         email: '',
         password: '',
+        terms: false
     })
     // server error
     const [serverError, setServerError] = useState('')
@@ -18,8 +18,10 @@ export default function Form() {
 
     // managing state for errors...empty unless inline validation (validateInput) updates key/value pair to have error
     const [errors, setErrors] = useState({
+        name: '',
         email: '',
         password: '',
+        terms: ''
     })
     // temporary state used to display response from API...this is not a commonly used convention
     const [post, setPost] = useState([]);
@@ -61,8 +63,10 @@ export default function Form() {
 
              // clear state, could also use a predetermined initial state variable here
              setFormState({
+                 name: '',
                 email: '',
-                password: '', 
+                password: '',
+                terms: false  
              })
          })
          .catch(() => {
@@ -90,10 +94,12 @@ export default function Form() {
 
    // Add a schema, used for all validation to determine whether the input is valid or not
    const formSchema = yup.object().shape({
+       name: yup.string().required('Name is required.'),
         // must have string present, must be shape of an email
         email: yup.string().email(),
         password: yup.string().required('Password is required.').min(6, 'Passwords must be at least 6 characters long.'), 
         // throws error if password is not at least 6 characters // value must be one of the values in the array otherwise throws error
+        terms: yup.boolean().oneOf([true])
    })
 
    // whenever state updates, validate the entire form, if valid, then change button to be enabled
@@ -109,9 +115,22 @@ export default function Form() {
        })
    }, [formState, formSchema])
    console.log('formState', formState)
+
    return (
-       <form>
-           <label htmlFor='email'>
+    <form onSubmit={formSubmit}>
+    {serverError && <p className='error'>{serverError}</p>}
+    <label htmlFor='name'>
+        Name
+         <input 
+         id='name' 
+         type='text' 
+         name='name' 
+         value={formState.name}
+         onChange={inputChange}
+     />
+    </label>
+    {errors.name.length > 0 ? <p className='error'>{errors.name}</p> : null}
+    <label htmlFor='email'>
                Email
                <input
                 id='email'
@@ -121,9 +140,9 @@ export default function Form() {
                 onChange={inputChange}
             />
            </label>
-           {errors.email.length > 0 ? 
+           {errors.email.length > 0 ? (
                     <p className='error'>{errors.email}</p>
-                 : null}
+                ) : null}
            <label htmlFor='password'>
                Password
                <input 
@@ -136,11 +155,22 @@ export default function Form() {
            </label>
            {errors.password.length > 0 &&
                     <p className='error'>{errors.password}</p>}
-                 <Link to='/register'>New User? Register now!</Link>
+           <label htmlFor='terms' className='terms'>
+               <input
+                 type='checkbox'
+                 id='terms'
+                 name='terms'
+                 checked={formState.terms}
+                 onChange={inputChange}
+            />
+                 Terms & Conditions
+           </label>
+           {errors.terms.length > 0 ? (
+                     <p className='error'>{errors.terms}</p>
+                 ) : null}
            <button type='submit' onChange={formSubmit} disabled={buttonDisabled}>Submit</button>
            {/*Displays post request */}
            <pre>{JSON.stringify(post, null, 2)}</pre>
-
 
        </form>
    )

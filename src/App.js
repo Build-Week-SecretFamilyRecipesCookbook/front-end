@@ -6,6 +6,7 @@ import { useParams,
 import './App.css';
 import styled from 'styled-components'
 import Login from './forms/Login'
+import Register from './forms/Register';
 
 
 function App() {
@@ -30,6 +31,9 @@ function App() {
       <Switch>
         <Route exact path='/login'>
           <Login />
+        </Route>
+        <Route exact path='/register'>
+          <Register />
         </Route>
       </Switch>
 
