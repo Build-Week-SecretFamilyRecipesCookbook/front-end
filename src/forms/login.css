@@ -1,0 +1,26 @@
+form{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding-left: 30%;
+    padding-right: 30%;
+    padding-top: 2rem;
+}
+
+label{
+    padding: .5rem;
+    text-align: left;
+    color: white;
+}
+
+input{
+display: flex;
+justify-content: center;
+}
+
+.formContainer{
+    margin: 0rem 6rem;
+    border-radius: 4px;
+    background-color: #878a88;
+    box-shadow: 5px 2.5px 2.5px #555756;
+}

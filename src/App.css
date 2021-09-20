@@ -2,6 +2,36 @@
   text-align: center;
 }
 
+nav{
+  padding: 1.25rem;
+  background-color: antiquewhite;
+  border-bottom: .125rem solid black;
+}
+
+nav a {
+  text-decoration: none;
+  padding: 3rem;
+  color: black;
+}
+
+.main-content{
+  background-image: url('https://www.snapfish.com/blog/wp-content/uploads/2018/09/Screenshot_2.jpg');
+  background-color: black;
+}
+
+.main-content h1{
+  padding: 1rem;
+}
+
+.card{
+  padding-left: 10%;
+  padding-right: 10%;
+  background-color:#f2e091;
+  margin: 1rem;
+  border-top: .125rem solid white;
+  border-bottom: .125rem solid white;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
