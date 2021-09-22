@@ -1,42 +1,50 @@
-import { useParams,
-  Link, 
-  Switch, 
-  Route } 
-  from 'react-router-dom'
-import './App.css';
-import styled from 'styled-components'
-import Login from './forms/Login'
-import Register from './forms/Register';
-
+import { useParams, Link, Switch, Route } from "react-router-dom";
+import "./App.css";
+import styled from "styled-components";
+import Login from "./forms/Login";
+import Register from "./forms/Register";
+import { useState } from "react/cjs/react.development";
+import UserContext from "./contexts/UserContext";
 
 function App() {
+  const [userdata, setUserData] = useState({
+    username: "",
+    password: "",
+    email: "",
+  });
+  const [loggedIn, setLoggedIn] = useState(false);
+
   return (
     <div className="App">
-      <nav>
-        <Link to='/'>Home</Link>
-        <Link to='/recipes'>All Recipes</Link>
-        <Link to='/profile'>Your Recipes</Link>
-        <Link to='/login'>Log In/Sign Up</Link>
-      </nav>
-      <div className='main-content'>
+      <UserContext.Provider value={{ userdata, setUserData }}>
+        <nav>
+          <Link to="/">Home</Link>
+          <Link to="/recipes">All Recipes</Link>
+          <Link to="/profile">Your Recipes</Link>
+          <Link to="/login">Log In/Sign Up</Link>
+        </nav>
+        <div className="main-content">
           <h1>Secret Recipes</h1>
-          <div className='card'>
+          <div className="card">
             <h2>Easily store all of your favorite recipes!</h2>
-            <p>Upload images, ingredients, and much more to your account and create your own personal cookbook!</p>
+            <p>
+              Upload images, ingredients, and much more to your account and
+              create your own personal cookbook!
+            </p>
             <p>Get inspirations from other user's recipes!</p>
             <p>Share your own recipes!</p>
           </div>
-      </div>
+        </div>
 
-      <Switch>
-        <Route exact path='/login'>
-          <Login />
-        </Route>
-        <Route exact path='/register'>
-          <Register />
-        </Route>
-      </Switch>
-
+        <Switch>
+          <Route exact path="/login">
+            <Login />
+          </Route>
+          <Route exact path="/register">
+            <Register />
+          </Route>
+        </Switch>
+      </UserContext.Provider>
     </div>
   );
 }

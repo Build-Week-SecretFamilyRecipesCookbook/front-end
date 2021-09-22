@@ -5,6 +5,7 @@ form{
     padding-left: 30%;
     padding-right: 30%;
     padding-top: 2rem;
+    margin-bottom: 2rem;
 }
 
 label{
@@ -23,4 +24,8 @@ justify-content: center;
     border-radius: 4px;
     background-color: #878a88;
     box-shadow: 5px 2.5px 2.5px #555756;
+}
+
+.formContainer button{
+    margin-bottom: .5rem;
 }
