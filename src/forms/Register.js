@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import * as yup from "yup";
-import {UserContext} from "../contexts/UserContext";
+import { UserContext } from "../contexts/UserContext";
 import "./login.css";
 
 export default function Register() {
-  const{userdata, setUserData} = useContext(UserContext);
+  const { userdata, setUserData } = useContext(UserContext);
   // managing state for our form inputs
   const [formState, setFormState] = useState({
     username: "",
@@ -59,8 +59,8 @@ export default function Register() {
 
     // send out POST request with obj as second param, for us that is formState
     // trigger .catch by changing URL to 'https://regres.in/api/register'
-    
-    console.log("User data: ",userdata)
+
+    console.log("User data: ", userdata);
     axios
       .post(
         "https://secret-recipes-bw.herokuapp.com/api/auth/register",
@@ -94,7 +94,6 @@ export default function Register() {
     // event.target.name --> name of the input that fired the event
     // event.target.value --> current value of the input that fired the event
     // event.target.type --> type attribute of the input
-
     const newFormState = {
       ...formState,
       [event.target.name]:
@@ -103,10 +102,10 @@ export default function Register() {
           : event.target.value,
     };
     setUserData({
-        username: formState.username,
-        password: formState.password,
-        email: formState.email
-    })
+      username: formState.username,
+      password: formState.password,
+      email: formState.email,
+    });
     validateChange(event); // for each change in input, do inline validation
     setFormState(newFormState); // update state with new data
   };
@@ -127,7 +126,6 @@ export default function Register() {
   // whenever state updates, validate the entire form, if valid, then change button to be enabled
   useEffect(() => {
     formSchema.isValid(formState).then((valid) => {
-
       // valid is a boolean
       // !true === false
       // !false === true
