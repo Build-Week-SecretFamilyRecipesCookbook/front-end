@@ -5,7 +5,7 @@ import { UserContext } from "../contexts/UserContext";
 import "./login.css";
 
 export default function Register() {
-  const { userdata, setUserData } = useContext(UserContext);
+  const { userData, setuserData } = useContext(UserContext);
   // managing state for our form inputs
   const [formState, setFormState] = useState({
     username: "",
@@ -60,11 +60,11 @@ export default function Register() {
     // send out POST request with obj as second param, for us that is formState
     // trigger .catch by changing URL to 'https://regres.in/api/register'
 
-    console.log("User data: ", userdata);
+    console.log("User data: ", userData);
     axios
       .post(
         "https://secret-recipes-bw.herokuapp.com/api/auth/register",
-        userdata
+        userData
       )
       .then((response) => {
         // update temp state with value from API to display in <pre>
@@ -101,7 +101,7 @@ export default function Register() {
           ? event.target.checked
           : event.target.value,
     };
-    setUserData({
+    setuserData({
       username: formState.username,
       password: formState.password,
       email: formState.email,

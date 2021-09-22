@@ -5,18 +5,22 @@ import Login from "./forms/Login";
 import Register from "./forms/Register";
 import { useState } from "react/cjs/react.development";
 import UserContext from "./contexts/UserContext";
+import { useEffect } from "react";
 
 function App() {
-  const [userdata, setUserData] = useState({
+  const [userData, setUserData] = useState({
     username: "",
     password: "",
     email: "",
   });
   const [loggedIn, setLoggedIn] = useState(false);
 
+  useEffect(()=>{
+    console.log(loggedIn)
+  },[loggedIn])
   return (
     <div className="App">
-      <UserContext.Provider value={{ userdata, setUserData }}>
+      <UserContext.Provider value={{ userData, setUserData, setLoggedIn }}>
         <nav>
           <Link to="/">Home</Link>
           <Link to="/recipes">All Recipes</Link>
