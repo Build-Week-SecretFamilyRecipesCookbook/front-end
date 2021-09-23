@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link, Switch, Route } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import * as yup from "yup";
 import "./login.css";
 import { UserContext } from "../contexts/UserContext";
+import { axiosWithAuth } from "../helpers/axiosWithAuth";
 
 export default function Form() {
-    const { userData, setUserData, setLoggedIn } = useContext(UserContext);
-
+  const { userData, setUserData, setLoggedIn } = useContext(UserContext);
+  const { push } = useHistory();
   // managing state for our form inputs
   const [formState, setFormState] = useState({
     username: "",
@@ -53,51 +54,37 @@ export default function Form() {
   // onSubmit function
   const formSubmit = (event) => {
     event.preventDefault();
-    
-    axios
-      .post("https://secret-recipes-bw.herokuapp.com/api/auth/login", formState)
+
+    axiosWithAuth()
+      .post("/auth/login", formState)
       .then((response) => {
-        // update temp state with value from API to display in <pre>
         localStorage.setItem("token", response.data.token);
 
         setUserData({
-            ...userData,
-            username: formState.username,
-            password: formState.password
-        })
-        
+          ...userData,
+          username: formState.username,
+          password: formState.password,
+        });
         setPost(response.data);
-        setLoggedIn(true);
-        // if successful request, clear any server errors
         setServerError(null);
-
-        // clear state, could also use a predetermined initial state variable here
         setFormState({
           username: "",
           password: "",
         });
+        push("/recipes");
       })
-      .catch(() => {
-        // this is where we could create a server error in the form...if API request fails...ex, for authentication the user doesn't exist in the database
-        setServerError("Error Message");
+      .catch((err) => {
+        const requestErrorText = err.response.data.error;
+        setServerError(requestErrorText);
       });
   };
   // onChange function(changeHandler)
   const inputChange = (event) => {
     // use persist with async code -> we pass the event into validateChange that has async promise logic with .validate
 
-    event.persist(); // necessary because we're passing the event asynchronously and we need it to exist even after this function completes (which will complete before validate finishes)
-    // event.target.name --> name of the input that fired the event
-    // event.target.value --> current value of the input that fired the event
-    // event.target.type --> type attribute of the input
-
-    // const newFormState = {
-    //   ...formState,
-    //   [event.target.name]: event.target.value,
-    // };
+    event.persist();
     validateChange(event); // for each change in input, do inline validation
     setFormState({ ...formState, [event.target.name]: event.target.value });
-    console.log("formState: ", formState)
   };
 
   // Add a schema, used for all validation to determine whether the input is valid or not

@@ -6,6 +6,10 @@ import Register from "./forms/Register";
 import { useState } from "react/cjs/react.development";
 import UserContext from "./contexts/UserContext";
 import { useEffect } from "react";
+import PrivateRoute from "./components/PrivateRoute";
+import Recipes from "./pages/Recipes";
+import { NavBar } from "./components/NavBar";
+import { PageBody } from "./components/PageBody";
 
 function App() {
   const [userData, setUserData] = useState({
@@ -13,40 +17,21 @@ function App() {
     password: "",
     email: "",
   });
-  const [loggedIn, setLoggedIn] = useState(false);
 
-  useEffect(()=>{
-    console.log(loggedIn)
-  },[loggedIn])
   return (
     <div className="App">
-      <UserContext.Provider value={{ userData, setUserData, setLoggedIn }}>
+      <UserContext.Provider value={{ userData, setUserData }}>
         <nav>
-          <Link to="/">Home</Link>
-          <Link to="/recipes">All Recipes</Link>
-          <Link to="/profile">Your Recipes</Link>
-          <Link to="/login">Log In/Sign Up</Link>
+          <div className="pageTitle">Secret Family Recipes</div>
+          <NavBar />
         </nav>
-        <div className="main-content">
-          <h1>Secret Recipes</h1>
-          <div className="card">
-            <h2>Easily store all of your favorite recipes!</h2>
-            <p>
-              Upload images, ingredients, and much more to your account and
-              create your own personal cookbook!
-            </p>
-            <p>Get inspirations from other user's recipes!</p>
-            <p>Share your own recipes!</p>
-          </div>
-        </div>
+        <PageBody />
 
         <Switch>
-          <Route exact path="/login">
-            <Login />
-          </Route>
-          <Route exact path="/register">
-            <Register />
-          </Route>
+          <Route exact path="/" component={Login} />
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+          <PrivateRoute path="/recipes" component={Recipes} />
         </Switch>
       </UserContext.Provider>
     </div>

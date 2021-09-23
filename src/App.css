@@ -3,9 +3,12 @@
 }
 
 nav{
+  display: flex;
+  align-items: center;
   padding: 1.25rem;
   background-color: antiquewhite;
   border-bottom: .125rem solid black;
+  height: 25px;
 }
 
 nav a {
@@ -13,7 +16,18 @@ nav a {
   padding: 3rem;
   color: black;
 }
-
+.pageTitle{
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+font-size: 27px;
+letter-spacing: -1.8px;
+word-spacing: 2px;
+color: #000000;
+font-weight: 700;
+text-decoration: none;
+font-style: normal;
+font-variant: normal;
+text-transform: capitalize;
+}
 .main-content{
   background-image: url('https://www.snapfish.com/blog/wp-content/uploads/2018/09/Screenshot_2.jpg');
   background-color: black;
@@ -27,7 +41,6 @@ nav a {
   padding-left: 10%;
   padding-right: 10%;
   background-color:#f2e091;
-  margin: 1rem;
   border-top: .125rem solid white;
   border-bottom: .125rem solid white;
 }
