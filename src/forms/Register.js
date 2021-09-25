@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
+import {useHistory} from 'react-router-dom'
 import axios from "axios";
 import * as yup from "yup";
 import { UserContext } from "../contexts/UserContext";
+import { axiosWithAuth } from "../helpers/axiosWithAuth";
 import "./login.css";
 
 export default function Register() {
-  const { userData, setuserData } = useContext(UserContext);
+  const { userData, setUserData } = useContext(UserContext);
+  const { push } = useHistory();
   // managing state for our form inputs
   const [formState, setFormState] = useState({
     username: "",
@@ -72,7 +75,29 @@ export default function Register() {
 
         // if successful request, clear any server errors
         setServerError(null);
+      //login the user
+        axiosWithAuth()
+          .post("/auth/login", userData)
+          .then((response) => {
+            localStorage.setItem("token", response.data.token);
 
+            setUserData({
+              ...userData,
+              username: formState.username,
+              password: formState.password,
+            });
+            setPost(response.data);
+            setServerError(null);
+            setFormState({
+              username: "",
+              password: "",
+            });
+            push("/recipes");
+          })
+          .catch((err) => {
+            const requestErrorText = err.response.data.error;
+            setServerError(requestErrorText);
+          });
         // clear state, could also use a predetermined initial state variable here
         setFormState({
           username: "",
@@ -101,7 +126,7 @@ export default function Register() {
           ? event.target.checked
           : event.target.value,
     };
-    setuserData({
+    setUserData({
       username: formState.username,
       password: formState.password,
       email: formState.email,

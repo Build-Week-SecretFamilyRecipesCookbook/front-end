@@ -1,26 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { axiosWithAuth } from "../helpers/axiosWithAuth";
+import { useContext } from "react/cjs/react.development";
+import { UserContext } from "../contexts/UserContext";
 
 const handleLogout = (e) => {
   localStorage.removeItem("token");
-  // axiosWithAuth()
-  //   .post("/logout")
-  //   .then((response) => {
-  //     console.log(response);
-  //     localStorage.removeItem("token");
-  //   });
 };
 
 export const NavBar = () => {
+  const { userData } = useContext(UserContext);
   if (localStorage.token) {
     return (
-      <>
-        <Link to="/recipes">Your Recipes</Link>
+      <nav>
+        <div className="pageTitle">Secret Family Recipes</div>
+        <Link to="/recipes">Your recipes</Link>
         <a data-testid="logoutButton" onClick={handleLogout} href="/">
           Logout
         </a>
-      </>
+        <div className="userName">{userData.username}</div>
+      </nav>
     );
   } else {
     return (
