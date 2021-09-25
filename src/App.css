@@ -2,47 +2,54 @@
   text-align: center;
 }
 
-nav{
+nav {
   display: flex;
-  align-items: center;
-  padding: 1.25rem;
-  background-color: antiquewhite;
-  border-bottom: .125rem solid black;
-  height: 25px;
+    width: 100%;
+    align-items: center;
+    padding: 1.25rem;
+    background-color: antiquewhite;
+    border-bottom: .125rem solid black;
+    height: 25px;
+    justify-content: flex-start;
 }
 
 nav a {
   text-decoration: none;
-  padding: 3rem;
+  padding: 1.5rem;
   color: black;
 }
-.pageTitle{
-  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-font-size: 27px;
-letter-spacing: -1.8px;
-word-spacing: 2px;
-color: #000000;
-font-weight: 700;
-text-decoration: none;
-font-style: normal;
-font-variant: normal;
-text-transform: capitalize;
+
+.userName{
+  position: absolute;
+  margin: 90%;
+  display: inline;
 }
-.main-content{
-  background-image: url('https://www.snapfish.com/blog/wp-content/uploads/2018/09/Screenshot_2.jpg');
+.pageTitle {
+  display: flex;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  font-size: 1.5rem;
+  color: #000000;
+  font-weight: 700;
+  text-decoration: none;
+  font-style: normal;
+  font-variant: normal;
+  text-transform: capitalize;
+}
+.main-content {
+  background-image: url("https://www.snapfish.com/blog/wp-content/uploads/2018/09/Screenshot_2.jpg");
   background-color: black;
 }
 
-.main-content h1{
+.main-content h1 {
   padding: 1rem;
 }
 
-.card{
+.card {
   padding-left: 10%;
   padding-right: 10%;
-  background-color:#f2e091;
-  border-top: .125rem solid white;
-  border-bottom: .125rem solid white;
+  background-color: #f2e091;
+  border-top: 0.125rem solid white;
+  border-bottom: 0.125rem solid white;
 }
 
 .App-logo {
