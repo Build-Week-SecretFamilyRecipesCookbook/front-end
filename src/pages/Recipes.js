@@ -34,7 +34,7 @@ const Recipes = () => {
                 <tr>
                     <th>Recipe Name</th>
                     <th>Category</th>
-                    <th>Source</th>
+                    <th>Source</th>1
                     <th></th>
                 </tr>
                 </thead>

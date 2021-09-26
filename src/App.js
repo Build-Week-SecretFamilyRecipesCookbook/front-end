@@ -9,6 +9,7 @@ import Recipes from "./pages/Recipes";
 import { NavBar } from "./components/NavBar";
 import { PageBody } from "./components/PageBody";
 import AddRecipe from "./pages/AddRecipe";
+import Recipe from "./pages/Recipe";
 
 function App() {
   const [userData, setUserData] = useState({
@@ -32,6 +33,7 @@ function App() {
           <Route path="/register" component={Register} />
           <PrivateRoute path="/recipes" component={Recipes} />
           <PrivateRoute path="/addrecipe" component={AddRecipe} />
+          <PrivateRoute path="/recipes/:id" component={Recipe} />
         </Switch>
       </UserContext.Provider>
     </div>
