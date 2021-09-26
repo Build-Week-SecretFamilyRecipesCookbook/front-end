@@ -1,11 +1,9 @@
-import { useParams, Link, Switch, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import "./App.css";
-import styled from "styled-components";
 import Login from "./forms/Login";
 import Register from "./forms/Register";
 import { useState } from "react/cjs/react.development";
 import UserContext from "./contexts/UserContext";
-import { useEffect } from "react";
 import PrivateRoute from "./components/PrivateRoute";
 import Recipes from "./pages/Recipes";
 import { NavBar } from "./components/NavBar";
