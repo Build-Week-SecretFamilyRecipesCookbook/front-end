@@ -19,7 +19,10 @@ function App() {
   return (
     <div className="App">
       <UserContext.Provider value={{ userData, setUserData }}>
+        <nav>
+          <div className="pageTitle">Secret Family Recipes</div>
           <NavBar />
+        </nav>
         <PageBody />
 
         <Switch>
