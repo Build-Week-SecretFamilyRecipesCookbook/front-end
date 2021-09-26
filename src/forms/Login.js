@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
-import axios from "axios";
 import * as yup from "yup";
 import "./login.css";
 import { UserContext } from "../contexts/UserContext";
 import { axiosWithAuth } from "../helpers/axiosWithAuth";
 
 export default function Form() {
-  const { userData, setUserData, setLoggedIn } = useContext(UserContext);
+  const { userData, setUserData } = useContext(UserContext);
   const { push } = useHistory();
   // managing state for our form inputs
   const [formState, setFormState] = useState({
@@ -76,6 +75,7 @@ export default function Form() {
       .catch((err) => {
         const requestErrorText = err.response.data.error;
         setServerError(requestErrorText);
+        console.log(serverError)
       });
   };
   // onChange function(changeHandler)
