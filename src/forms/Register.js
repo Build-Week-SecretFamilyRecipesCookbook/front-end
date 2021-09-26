@@ -63,7 +63,6 @@ export default function Register() {
     // send out POST request with obj as second param, for us that is formState
     // trigger .catch by changing URL to 'https://regres.in/api/register'
 
-    console.log("User data: ", userData);
     axios
       .post(
         "https://secret-recipes-bw.herokuapp.com/api/auth/register",
@@ -88,10 +87,6 @@ export default function Register() {
             });
             setPost(response.data);
             setServerError(null);
-            setFormState({
-              username: "",
-              password: "",
-            });
             push("/recipes");
           })
           .catch((err) => {

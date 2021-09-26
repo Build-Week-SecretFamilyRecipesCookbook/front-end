@@ -2,7 +2,7 @@ import { Switch, Route } from "react-router-dom";
 import "./App.css";
 import Login from "./forms/Login";
 import Register from "./forms/Register";
-import { useState } from "react/cjs/react.development";
+import React, {useState} from "react";
 import UserContext from "./contexts/UserContext";
 import PrivateRoute from "./components/PrivateRoute";
 import Recipes from "./pages/Recipes";
@@ -13,13 +13,15 @@ function App() {
   const [userData, setUserData] = useState({
     username: "",
     password: "",
-    email: "",
   });
 
   return (
     <div className="App">
       <UserContext.Provider value={{ userData, setUserData }}>
+        <nav>
+          <div className="pageTitle">Secret Family Recipes</div>
           <NavBar />
+        </nav>
         <PageBody />
 
         <Switch>
