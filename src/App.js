@@ -8,6 +8,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import Recipes from "./pages/Recipes";
 import { NavBar } from "./components/NavBar";
 import { PageBody } from "./components/PageBody";
+import AddRecipe from "./pages/AddRecipe";
 
 function App() {
   const [userData, setUserData] = useState({
@@ -25,10 +26,12 @@ function App() {
         <PageBody />
 
         <Switch>
+          <PrivateRoute exact path="/" component={Recipes} />
           <Route exact path="/" component={Login} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <PrivateRoute path="/recipes" component={Recipes} />
+          <PrivateRoute path="/addrecipe" component={AddRecipe} />
         </Switch>
       </UserContext.Provider>
     </div>

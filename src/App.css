@@ -56,6 +56,22 @@ nav a {
   height: 40vmin;
   pointer-events: none;
 }
+.addItemButton{
+  position:fixed;
+  width: 120px;
+  left: 50%;
+  right: 50%;
+  transform: translate(-50%, -50%);
+}
+.addRecipeForm{
+  display: flex;
+}
+.form-group{
+  display: flex;
+}
+.form-group label{
+  color:black;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
