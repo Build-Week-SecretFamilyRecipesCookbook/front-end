@@ -142,8 +142,6 @@ export default function Form() {
         <button type="submit" disabled={buttonDisabled}>
           Submit
         </button>
-        {/*Displays post request */}
-        <pre>{JSON.stringify(post, null, 2)}</pre>
       </form>
     </div>
   );
